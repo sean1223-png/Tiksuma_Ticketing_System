@@ -197,7 +197,8 @@ $conn->close();
       margin-left: 10px;
 
     }
-     @media print {
+  @media print {
+    /* Hide all elements except main content */
     body * {
       visibility: hidden;
     }
@@ -211,10 +212,75 @@ $conn->close();
       left: 0;
       top: 0;
       width: 100%;
+      margin: 0;
+      padding: 20px;
+      box-shadow: none;
+      background: white;
     }
 
-    .print-btn {
+    /* Hide print button and other controls */
+    .print-btn,
+    .table-controls,
+    .table-search {
       display: none !important;
+    }
+
+    /* Improve table appearance for print */
+    .ticket-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .ticket-table th,
+    .ticket-table td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .ticket-table th {
+      background: #f0f0f0 !important;
+      font-weight: bold;
+    }
+
+    /* Ensure badges are visible */
+    .priority-badge,
+    .status-badge {
+      color: #000 !important;
+      background: transparent !important;
+      border: 1px solid #000;
+      padding: 2px 6px;
+      font-size: 10px;
+    }
+
+    /* Hide action columns */
+    .ticket-actions {
+      display: none !important;
+    }
+
+    /* Add page break for long tables */
+    .ticket-table tbody tr:nth-child(20n) {
+      page-break-after: always;
+    }
+
+    /* Print header */
+    .main-content::before {
+      content: "TIKSUMA Ticket List - Printed on " attr(data-date);
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+    }
+
+    /* Ensure no shadows or backgrounds */
+    .table-container {
+      box-shadow: none;
+      background: white;
     }
   }
   .print-btn{

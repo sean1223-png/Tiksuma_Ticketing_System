@@ -262,6 +262,19 @@ function time_elapsed_string($datetime, $full = false) {
       padding: 2px 5px;
       border-radius: 50%;
     }
+    .print-btn {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 5px;
+      margin-right: 10px;
+      transition: color 0.3s ease;
+    }
+    .print-btn:hover {
+      color: #065fd4;
+    }
     /* Enhanced Sidebar Styles */
      .sidebar {
       position: fixed;
@@ -649,6 +662,123 @@ function time_elapsed_string($datetime, $full = false) {
     padding: 10px;
   }
 }
+
+/* Print Layout Styles */
+@media print {
+  /* Hide non-essential elements */
+  .sidebar,
+  .topbar,
+  .notification-dropdown,
+  .profile-dropdown,
+  .print-btn,
+  .menu-toggle,
+  .toggle-btn,
+  .activity-item:hover {
+    display: none !important;
+  }
+
+  /* Adjust main content for full width and reordered layout */
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 20px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Reorder sections for print */
+  h2 {
+    order: 1 !important;
+  }
+
+  .dashboard-grid:first-of-type {
+    order: 2 !important; /* Stat cards */
+  }
+
+  .toggle-section {
+    order: 3 !important;
+    display: block !important; /* Show toggle section */
+  }
+
+  .collapsible-content {
+    display: block !important; /* Show time-based stats */
+  }
+
+  .dashboard-grid:nth-of-type(2) {
+    order: 4 !important; /* Charts */
+  }
+
+  .chart-container {
+    order: 4 !important; /* Charts */
+    display: block !important;
+  }
+
+  .activity-container {
+    order: 6 !important;
+  }
+
+  /* Ensure text is black for printing */
+  body,
+  h1, h2, h3, h4, h5, h6,
+  p, span, div,
+  .stat-card h3,
+  .stat-card .value,
+  .chart-container h3,
+  .activity-container h3,
+  .activity-title,
+  .activity-details,
+  .activity-time {
+    color: black !important;
+  }
+
+  /* Adjust stat cards for print */
+  .stat-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  /* Adjust chart containers */
+  .chart-container {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px !important;
+  }
+
+  .chart-wrapper {
+    height: 250px !important; /* Fixed height for charts in print */
+  }
+
+  /* Adjust activity container */
+  .activity-container {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .activity-item {
+    border-bottom: 1px solid #ccc !important;
+    cursor: default !important;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 0.5in;
+    size: A4;
+  }
+
+  /* Ensure no background colors bleed through */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -693,6 +823,10 @@ function time_elapsed_string($datetime, $full = false) {
         <?php endif; ?>
       </div>
     </div>
+
+    <button id="printBtn" class="print-btn" title="Print Dashboard">
+      <i class="fas fa-print"></i>
+    </button>
 
     <div class="profile-dropdown">
       <button id="profileToggle" class="profile-icon-btn">
@@ -1000,6 +1134,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!dropdown.contains(e.target) && !bellIcon.contains(e.target)) {
         dropdown.classList.remove('show');
       }
+    });
+  }
+
+  // Print button functionality
+  const printBtn = document.getElementById('printBtn');
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      window.print();
     });
   }
 

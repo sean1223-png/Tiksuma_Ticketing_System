@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'includes/message-functions.php';
 
 header('Content-Type: application/json');
 
@@ -33,24 +34,11 @@ if (empty($message)) {
     exit;
 }
 
-// Initialize messages array in session if not exists
-if (!isset($_SESSION['ticket_messages'])) {
-    $_SESSION['ticket_messages'] = [];
+// Send message using function
+if (send_message($ticket_id, $_SESSION['username'], $message)) {
+    echo json_encode(['success' => true, 'message' => 'Message sent']);
+} else {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Failed to send message']);
 }
-
-if (!isset($_SESSION['ticket_messages'][$ticket_id])) {
-    $_SESSION['ticket_messages'][$ticket_id] = [];
-}
-
-// Add message
-$message_data = [
-    'id' => uniqid(),
-    'sender' => $_SESSION['username'],
-    'message' => $message,
-    'timestamp' => date('Y-m-d H:i:s')
-];
-
-$_SESSION['ticket_messages'][$ticket_id][] = $message_data;
-
-echo json_encode(['success' => true, 'message' => 'Message sent']);
 ?>

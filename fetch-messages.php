@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'includes/message-functions.php';
 
 header('Content-Type: application/json');
 
@@ -24,11 +25,8 @@ if ($ticket_id <= 0) {
     exit;
 }
 
-// Get messages from session
-$messages = [];
-if (isset($_SESSION['ticket_messages'][$ticket_id])) {
-    $messages = $_SESSION['ticket_messages'][$ticket_id];
-}
+// Get messages using function
+$messages = get_messages($ticket_id);
 
 echo json_encode(['success' => true, 'messages' => $messages]);
 ?>
