@@ -42,6 +42,11 @@ $notes = $ticket['notes'] ?? [];
             <span class="meta-item">Created: <?= date('M d, Y H:i', strtotime($created_at)) ?></span>
             <span class="meta-item">Updated: <?= $updated_at ? date('M d, Y H:i', strtotime($updated_at)) : 'Never' ?></span>
         </div>
+        <div class="ticket-actions-header">
+            <button class="print-btn" onclick="window.print()">
+                <i class="fas fa-print"></i> Print Ticket
+            </button>
+        </div>
     </div>
 
     <div class="ticket-content">
@@ -478,6 +483,210 @@ $notes = $ticket['notes'] ?? [];
 
 .btn-send-message:hover {
     background: #218838;
+}
+
+/* Print Styles */
+@media print {
+    /* Hide all elements except ticket content */
+    body * {
+        visibility: hidden;
+    }
+
+    .ticket-view-container,
+    .ticket-view-container * {
+        visibility: visible;
+    }
+
+    .ticket-view-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+        background: white;
+        max-width: none;
+    }
+
+    /* Hide print button and actions */
+    .print-btn,
+    .ticket-actions,
+    .ticket-actions-header,
+    .ticket-messaging {
+        display: none !important;
+    }
+
+    /* Improve header for print */
+    .ticket-header {
+        border-bottom: 2px solid #000;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+
+    .ticket-header h2 {
+        font-size: 28px;
+        color: #000;
+        margin-bottom: 10px;
+    }
+
+    .ticket-meta {
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Format content for print */
+    .ticket-content {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .ticket-details {
+        width: 100%;
+    }
+
+    .detail-section {
+        margin-bottom: 25px;
+        page-break-inside: avoid;
+    }
+
+    .detail-section h3 {
+        font-size: 20px;
+        color: #000;
+        border-bottom: 1px solid #000;
+        margin-bottom: 15px;
+    }
+
+    .detail-row {
+        display: table-row;
+        margin-bottom: 8px;
+    }
+
+    .detail-row label {
+        display: table-cell;
+        font-weight: bold;
+        color: #000;
+        min-width: 150px;
+        padding-right: 15px;
+    }
+
+    .detail-row span {
+        display: table-cell;
+        color: #000;
+    }
+
+    .description-content {
+        max-width: none;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    /* Make badges visible in print */
+    .priority-badge,
+    .status-badge {
+        color: #000 !important;
+        background: transparent !important;
+        border: 1px solid #000;
+        padding: 2px 8px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* Format user info for print */
+    .user-info {
+        display: table;
+        width: 100%;
+    }
+
+    .user-avatar {
+        display: table-cell;
+        width: 60px;
+        vertical-align: top;
+    }
+
+    .user-details {
+        display: table-cell;
+        padding-left: 20px;
+        vertical-align: top;
+    }
+
+    .user-name {
+        font-size: 16px;
+        color: #000;
+        margin-bottom: 5px;
+    }
+
+    .user-email,
+    .user-username {
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Format notes for print */
+    .ticket-notes {
+        border-top: 2px solid #000;
+        padding-top: 20px;
+        margin-top: 30px;
+        page-break-before: always;
+    }
+
+    .ticket-notes h3 {
+        font-size: 20px;
+        color: #000;
+        margin-bottom: 20px;
+    }
+
+    .note-item {
+        background: white !important;
+        border: 1px solid #000;
+        border-radius: 0;
+        padding: 15px;
+        margin-bottom: 15px;
+        page-break-inside: avoid;
+    }
+
+    .note-header {
+        border-bottom: 1px solid #000;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+
+    .note-header strong {
+        color: #000;
+        font-size: 14px;
+    }
+
+    .note-date {
+        color: #333;
+        font-size: 12px;
+    }
+
+    .note-content {
+        color: #000;
+        line-height: 1.4;
+        font-size: 13px;
+    }
+
+    .no-notes {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+
+    /* Add print header */
+    .ticket-view-container::before {
+        content: "TIKSUMA Ticket Details - Printed on " attr(data-date);
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        padding-bottom: 10px;
+        color: #000;
+    }
 }
 
 /* Responsive */
