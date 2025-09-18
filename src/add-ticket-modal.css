@@ -1,0 +1,135 @@
+/* Background */
+body {
+  margin: 0;
+  padding: 0;
+ font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f0f6ff, #78b7f1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Form Container */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ticket Form Box */
+.ticket-form-box {
+  position: relative;
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Header */
+.form-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  color: #2d3e50;
+  letter-spacing: 1px;
+
+}
+
+.form-header p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  font-size: 22px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: rgb(17, 102, 145);
+}
+
+/* Form Inputs */
+input[type="text"],
+select,
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Textarea */
+textarea {
+  resize: none;
+  height: 120px;
+}
+
+/* File Upload Wrapper */
+.upload-wrapper {
+  position: relative;
+  margin-top: 15px;
+}
+.upload-wrapper:hover {
+  border-color: #2a5083;
+  background-color: #f0f8ff;
+}
+
+.upload-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #333;
+}
+
+/* Select Box */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #065fd4;
+  color: white;
+  padding: 12px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0b4abf;
+}
